@@ -7,7 +7,7 @@ import "./styles.css";
 function App() {
   return (
     <div className="App">
-      <h1>Hooks Playground</h1>
+      <h1>React 16 Playground</h1>
       {this.props}
     </div>
   );

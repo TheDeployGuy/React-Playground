@@ -1,6 +1,13 @@
 import * as React from "react";
+import { logError } from "./logErrorService";
 
-export default class ErrorBoundary extends React.Component<{}, {}> {
+export default class ErrorBoundary extends React.Component<
+  {},
+  {
+    hasError: boolean;
+    error: string;
+  }
+> {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: "" };
@@ -13,12 +20,7 @@ export default class ErrorBoundary extends React.Component<{}, {}> {
 
   componentDidCatch(error, info) {
     // You can also log the error to an error reporting service
-    this.logErrorToMyService(error, info);
-  }
-
-  logErrorToMyService(error, info) {
-    console.log("Logging to my service");
-    console.log(error);
+    logError(error, info);
   }
 
   render() {
@@ -30,11 +32,13 @@ export default class ErrorBoundary extends React.Component<{}, {}> {
             <span className="close">&times;</span>
             <h2>App Crashed</h2>
             <p>Something has went horribly wrong.</p>
+            {this.state.error}
           </div>
         </div>
       );
     }
 
+    // If there is no error just render the children component.
     return this.props.children;
   }
 }
