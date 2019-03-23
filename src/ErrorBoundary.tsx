@@ -1,12 +1,13 @@
 import * as React from "react";
 import { logError } from "./logErrorService";
 
+interface ErrorBoundaryProps {
+  hasError: boolean;
+  error: string;
+}
 export default class ErrorBoundary extends React.Component<
   {},
-  {
-    hasError: boolean;
-    error: string;
-  }
+  ErrorBoundaryProps
 > {
   constructor(props) {
     super(props);
